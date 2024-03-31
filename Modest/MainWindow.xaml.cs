@@ -20,18 +20,27 @@ namespace Modest
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
-        private async void GetData(object sender, RoutedEventArgs e)
+        private async void GetData(string date)
         {
-            var dates = await HttpHelper.GetDates("/dates");
-            var token = await HttpHelper.GetRooms("?day=30&month=10&year=23");
+            var dateText = date.Split('-');
+            var day = dateText[0];
+            var month = dateText[1];
+            var year = dateText[2];
+
+            var token = await HttpHelper.GetRooms($"?day={day}&month={month}&year={year}");
             if (token.Item2 != null)
             {
                 var parser = new DataParser();
                 var superParser = new SuperParse();
                 var i = parser.ParseFloors(token.Item2);
                 var data = superParser.Parse(token.Item1);
+                CountOfRooms.Text = "Количество комнат на этаже: " + data.rooms.Length;
+                RoomsWindows.Text = "Окна на этаже: " + string.Join(' ', data.rooms);
+                RoomsCount.Text = "Количество комнат: " + data.root.data.rooms.Count;
+                Numbers.Text = "Номера комнат: " + string.Join(' ', data.root.data.rooms);
                 Draw(i, i.RoomCount, i.FloorCount, data.rooms);
             }
         }
@@ -55,6 +64,7 @@ namespace Modest
                 int currentRow = Rooms.RowDefinitions.Count-floor_k-1;
                 int currentColumn = 0;
                 int temp = 1;
+
                 int iterator = 0;
                 int current = 0;
                 foreach(var light in floor.Lights)
@@ -84,6 +94,20 @@ namespace Modest
                 }
                 floor_k++;
             }
+        }
+
+        private async void LoadedAll(object sender, RoutedEventArgs e)
+        {
+            var dates = await HttpHelper.GetDates("/date");
+            foreach(var item in dates.message)
+            {
+                Dates.Items.Add(item);
+            }
+        }
+
+        private void Reselect(object sender, SelectionChangedEventArgs e)
+        {
+            GetData((string)Dates.SelectedItem);
         }
     }
 }

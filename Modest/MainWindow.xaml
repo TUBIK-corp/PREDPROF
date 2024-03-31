@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Modest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Loaded="LoadedAll">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Button Click="GetData"/>
+        <ComboBox x:Name="Dates" Grid.Row="1" SelectionChanged="Reselect"/>
         <Grid Grid.Row="2">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
@@ -40,8 +40,26 @@
                             <TextBlock Text="Ответ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
-                        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Gray" BorderThickness="2"/>
-                        <Border Grid.Column="1"  Grid.Row="1" BorderBrush="Gray" BorderThickness="2"/>
+                        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Gray" BorderThickness="2">
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="CountOfRooms" Grid.Row="0"/>
+                                <TextBlock x:Name="RoomsWindows" Grid.Row="1"/>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="1"  Grid.Row="1" BorderBrush="Gray" BorderThickness="2">
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="RoomsCount" Grid.Row="0"/>
+                                <TextBlock x:Name="Numbers" Grid.Row="1" TextWrapping="Wrap"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Border>
             </Grid>

@@ -18,7 +18,7 @@ namespace Modest.Helpers
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-Auth-Token", "ppo_10_17129"); // указываем логин в заголовке
 
-            var response = await client.GetAsync("https://olimp.miet.ru/ppo_it_final?day=30&month=10&year=23"); // отправляем GET-запрос
+            var response = await client.GetAsync("https://olimp.miet.ru/ppo_it_final" + parameters); // отправляем GET-запрос
 
             if (response.IsSuccessStatusCode)
             {
@@ -32,17 +32,17 @@ namespace Modest.Helpers
             }
             return ("", null);
         }
-        public async static Task<Root> GetDates(string parameters)
+        public async static Task<Rootobject> GetDates(string parameters)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-Auth-Token", "ppo_10_17129"); 
 
-            var response = await client.GetAsync("https://olimp.miet.ru/ppo_it_final?day=30&month=10&year=23"); 
+            var response = await client.GetAsync("https://olimp.miet.ru/ppo_it_final" + parameters); 
 
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var token = JsonConvert.DeserializeObject<Root>(responseContent);
+                var token = JsonConvert.DeserializeObject<Rootobject>(responseContent);
                 return token;
             }
             else
