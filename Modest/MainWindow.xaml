@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Modest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Button Click="GetData"/>
+        <Grid Grid.Row="2">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0">
+                    <Grid x:Name="Rooms"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="2">
+                            <TextBlock Text="Вводные данные" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="2">
+                            <TextBlock Text="Ответ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
 
-    </Grid>
+                        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Gray" BorderThickness="2"/>
+                        <Border Grid.Column="1"  Grid.Row="1" BorderBrush="Gray" BorderThickness="2"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+        </Grid>
+    </Grid> 
 </Window>
